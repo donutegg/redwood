@@ -5,8 +5,7 @@ export type GetEntry = (
 ) => Promise<FunctionComponent | { default: FunctionComponent } | null>
 
 export type GetBuilder = (
-  // FIXME (from original waku code) can we somehow avoid leaking internal
-  // implementation?
+  // FIXME can we somehow avoid leaking internal implementation?
   unstable_decodeId: (encodedId: string) => [id: string, name: string]
 ) => Promise<{
   [pathStr: string]: {
@@ -17,10 +16,12 @@ export type GetBuilder = (
   }
 }>
 
-/**
- * Used to look up the component to import when calling `serve('App')` in
- * entry.client.tsx
- */
+// This is for ignored dynamic imports
+// XXX Are there any better ways?
+export type unstable_GetCustomModules = () => Promise<{
+  [name: string]: string
+}>
+
 export function defineEntries(getEntry: GetEntry, getBuilder?: GetBuilder) {
   return { getEntry, getBuilder }
 }

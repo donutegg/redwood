@@ -11,7 +11,7 @@ import { createServer } from 'vite'
 
 import { getPaths } from '@redwoodjs/project-config'
 
-import { defineEntries } from '../entries'
+import { defineEntries } from '../waku-server'
 // import type { unstable_GetCustomModules } from '../waku-server'
 
 import { configFileConfig, resolveConfig } from './config'
@@ -211,7 +211,8 @@ const getEntriesFile = async (
     )
   }
 
-  return rwPaths.web.distServerEntries
+  // TODO: Don't hardcode the name of the entries file
+  return path.join(rwPaths.web.distServer, 'entries.js') // path.join(config.root, config.framework.entriesJs)
 }
 
 const getFunctionComponent = async (
