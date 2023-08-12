@@ -10,7 +10,11 @@ import { getPaths, writeFile } from '../../lib'
 import c from '../../lib/colors'
 import { isTypeScriptProject } from '../../lib/project'
 
-import { command, description, EXPERIMENTAL_TOPIC_ID } from './setupRsc'
+import {
+  command,
+  description,
+  EXPERIMENTAL_TOPIC_ID,
+} from './setupStreamingSsr'
 import { printTaskEpilogue } from './util'
 
 export const handler = async ({ force, verbose }) => {
@@ -114,41 +118,6 @@ export const handler = async ({ force, verbose }) => {
 
           writeFile(counterPath, counterTemplate, {
             overwriteExisting: force,
-          })
-        },
-      },
-      {
-        title: 'Adding CSS files...',
-        task: async () => {
-          const files = [
-            {
-              template: 'Counter.css.template',
-              path: 'Counter.css',
-            },
-            {
-              template: 'Counter.module.css.template',
-              path: 'Counter.module.css',
-            },
-            {
-              template: 'App.css.template',
-              path: 'App.css',
-            },
-            {
-              template: 'App.module.css.template',
-              path: 'App.module.css',
-            },
-          ]
-
-          files.forEach((file) => {
-            const template = fs.readFileSync(
-              path.resolve(__dirname, 'templates', 'rsc', file.template),
-              'utf-8'
-            )
-            const filePath = path.join(rwPaths.web.src, file.path)
-
-            writeFile(filePath, template, {
-              overwriteExisting: force,
-            })
           })
         },
       },

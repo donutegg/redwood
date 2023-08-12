@@ -319,7 +319,7 @@ Now over to the cell, we need access to that `{id}` route param so we can look u
 
 ```jsx title="web/src/components/ArticleCell/ArticleCell.jsx"
 export const QUERY = gql`
-  query FindArticleQuery($id: Int!) {
+  query ArticleQuery($id: Int!) {
     // highlight-next-line
     article: post(id: $id) {
       id
@@ -349,11 +349,11 @@ export const Success = ({ article }) => {
 <TabItem value="ts" label="TypeScript">
 
 ```tsx title="web/src/components/ArticleCell/ArticleCell.tsx"
-import type { FindArticleQuery } from 'types/graphql'
+import type { ArticleQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
-  query FindArticleQuery($id: Int!) {
+  query ArticleQuery($id: Int!) {
     // highlight-next-line
     article: post(id: $id) {
       id
@@ -374,7 +374,7 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-export const Success = ({ article }: CellSuccessProps<FindArticleQuery, FindArticleQueryVariables>) => {
+export const Success = ({ article }: CellSuccessProps<ArticleQuery>) => {
   return <div>{JSON.stringify(article)}</div>
 }
 ```
@@ -514,7 +514,7 @@ export const Success = ({ article, id, rand }) => {
 <TabItem value="ts" label="TypeScript">
 
 ```tsx
-interface Props extends CellSuccessProps<FindArticleQuery, FindArticleQueryVariables> {
+interface Props extends CellSuccessProps<ArticleQuery> {
   id: number
   rand: number
 }
@@ -744,7 +744,7 @@ Last but not least we can update the `ArticleCell` to properly display our blog 
 import Article from 'src/components/Article'
 
 export const QUERY = gql`
-  query FindArticleQuery($id: Int!) {
+  query ArticleQuery($id: Int!) {
     article: post(id: $id) {
       id
       title
@@ -775,11 +775,11 @@ export const Success = ({ article }) => {
 // highlight-next-line
 import Article from 'src/components/Article'
 
-import type { FindArticleQuery } from 'types/graphql'
+import type { ArticleQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
-  query FindArticleQuery($id: Int!) {
+  query ArticleQuery($id: Int!) {
     article: post(id: $id) {
       id
       title
@@ -797,7 +797,7 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-export const Success = ({ article }: CellSuccessProps<FindArticleQuery, FindArticleQueryVariables>) => {
+export const Success = ({ article }: CellSuccessProps<ArticleQuery>) => {
   // highlight-next-line
   return <Article article={article} />
 }
