@@ -1,0 +1,6 @@
+{
+  "c81bcfa65f57a3fe9c65fe3eb73e07dd6bea3188": {
+    "message": "fix(deps): update dependency core-js to v3.32.0 (#9030)",
+    "needsCherryPick": true
+  }
+}
